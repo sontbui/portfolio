@@ -66,7 +66,7 @@ export function BeaconDownload() {
         <Reveal>
           <p className="mt-5 max-w-[760px] text-[12.5px] leading-[1.6] text-fg-faint">
             Distribution note: these are internal-tool builds — the packaged database credential is
-            encrypted but, as the case study's security section explains, that is obfuscation by
+            encrypted but, as the case study&apos;s security section explains, that is obfuscation by
             design. Treat access as trusted-circle, exactly as the project&apos;s own README does.
           </p>
         </Reveal>
