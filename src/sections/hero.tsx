@@ -3,11 +3,9 @@ import { ArrowRight, Download, MapPin } from "lucide-react";
 import { ButtonLink } from "@/components/ui/button-link";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/motion/reveal";
-import { Stagger } from "@/components/motion/stagger";
 import { TextReveal } from "@/components/motion/text-reveal";
 import { Magnetic } from "@/components/motion/magnetic";
-import { riseSm } from "@/constants/motion";
-import { HERO_STEPS } from "@/constants/data";
+import { HeroPipelineCard } from "@/sections/hero-pipeline";
 import { SITE, SOCIALS } from "@/constants/site";
 
 /**
@@ -103,49 +101,5 @@ export function Hero() {
         </Reveal>
       </Container>
     </section>
-  );
-}
-
-/** Decorative "terminal" card previewing the AI pipeline stages. */
-function HeroPipelineCard() {
-  return (
-    <figure
-      className="overflow-hidden rounded-2xl border border-white/[0.09] bg-bg-deeper shadow-[var(--shadow-card)]"
-      aria-label="Preview of the AI automation pipeline: Jira ticket to pull request in six agent-driven steps"
-    >
-      <div className="flex items-center gap-2 border-b border-white/[0.07] bg-surface px-4 py-3">
-        <span aria-hidden className="size-[11px] rounded-full bg-surface-active" />
-        <span aria-hidden className="size-[11px] rounded-full bg-surface-active" />
-        <span aria-hidden className="size-[11px] rounded-full bg-surface-active" />
-        <span className="ml-2 font-mono text-xs text-fg-faint">agent-pipeline.yaml</span>
-      </div>
-      <div className="p-5 sm:p-6">
-        <div className="mb-3.5 flex items-center gap-2.5">
-          <span className="font-mono text-[11px] uppercase tracking-[0.1em] text-fg-ghost">
-            Jira Ticket
-          </span>
-          <span aria-hidden className="h-px flex-1 bg-white/[0.08]" />
-          <span className="font-mono text-[11px] uppercase tracking-[0.1em] text-fg-ghost">
-            Pull Request
-          </span>
-        </div>
-        <Stagger as="ol" className="flex flex-col gap-2" stagger={0.09} delayChildren={0.35}>
-          {HERO_STEPS.map((step) => (
-            <Reveal as="li" key={step.n} item variants={riseSm}>
-              <div className="flex items-center gap-2.5 rounded-[9px] border border-accent/20 bg-accent/[0.06] px-3 py-2.5">
-                <span
-                  aria-hidden
-                  className="inline-flex size-6 flex-none items-center justify-center rounded-md bg-accent/15 font-mono text-[11px] font-semibold text-accent-soft"
-                >
-                  {step.n}
-                </span>
-                <span className="text-caption text-fg-strong">{step.label}</span>
-                <span className="ml-auto font-mono text-[11px] text-accent">agent</span>
-              </div>
-            </Reveal>
-          ))}
-        </Stagger>
-      </div>
-    </figure>
   );
 }

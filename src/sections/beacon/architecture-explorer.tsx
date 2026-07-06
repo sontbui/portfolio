@@ -171,7 +171,7 @@ function NodeButton({
       aria-pressed={isSelected}
       title={node.responsibility}
       className={cn(
-        "group relative rounded-[10px] border px-3 py-2.5 text-left transition-all",
+        "group relative rounded-[10px] border px-3 py-2.5 text-left transition-all active:scale-[0.98] motion-reduce:active:scale-100",
         isSelected
           ? "border-brand/60 bg-brand/[0.12] shadow-glow-brand"
           : isRelated

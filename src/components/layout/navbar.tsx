@@ -57,9 +57,9 @@ export function Navbar() {
           <span>{SITE.name}</span>
         </a>
 
-        {/* Desktop links */}
+        {/* Desktop links — anchored to the right edge; the sys chip trails them. */}
         <LayoutGroup>
-          <ul className="hidden items-center gap-0.5 md:flex">
+          <ul className="ml-auto hidden items-center gap-0.5 md:flex">
             {NAV_LINKS.map((link) => {
               const isActive = activeId === link.href.slice(1);
               return (
@@ -92,6 +92,22 @@ export function Navbar() {
             })}
           </ul>
         </LayoutGroup>
+
+        {/* System status — the nav knows where you are (decorative; the pill
+            carries the semantic aria-current). Accent while the AI Platform
+            is active, matching the background's raised activity. */}
+        <span
+          aria-hidden
+          className="hidden items-center gap-1.5 font-mono text-[10.5px] text-fg-faint xl:flex"
+        >
+          <i
+            className={cn(
+              "size-1.5 animate-pulse-dot rounded-full",
+              activeId === "ai-platform" ? "bg-accent" : "bg-success",
+            )}
+          />
+          sys · {activeId || "idle"}
+        </span>
 
         {/* Mobile toggle */}
         <button

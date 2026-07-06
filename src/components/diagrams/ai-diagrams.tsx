@@ -1,10 +1,10 @@
 import { RefreshCw } from "lucide-react";
 
 import { DiagramFrame, DiagramLabel, FlowArrow } from "@/components/diagrams/primitives";
+import { SequenceRunner } from "@/components/diagrams/sequence-runner";
 import { Reveal } from "@/components/motion/reveal";
 import { Stagger } from "@/components/motion/stagger";
-import { Draw } from "@/components/motion/draw";
-import { connectorIn, fadeInScale, riseSm, STAGGER } from "@/constants/motion";
+import { connectorIn, fadeInScale, STAGGER } from "@/constants/motion";
 import { AGENTS, SEQUENCE } from "@/constants/data";
 
 /* ==========================================================================
@@ -116,45 +116,21 @@ export function AgentOrchestrationDiagram() {
 
 /* ==========================================================================
    Execution Sequence · Ticket → PR
-   Ordered, numbered timeline of the seven pipeline stages.
+   Ordered, numbered timeline of the seven pipeline stages — runnable.
 
-   Motion: the accent spine draws downward while each stage lights up in
-   execution order — the diagram reads as the pipeline running once, then
-   rests.
+   Motion: the spine draws in on scroll, the pipeline auto-runs once (statuses
+   move queued → running → done in execution order), then hands the reader a
+   Replay control. The diagram demonstrates the product instead of describing
+   it. See sequence-runner.tsx for the interaction contract.
    ========================================================================== */
 
 export function ExecutionSequenceDiagram() {
   return (
     <DiagramFrame
-      label="Execution sequence from Jira ticket to pull request across seven stages, each performed by a specific agent or connector."
+      label="Runnable execution sequence from Jira ticket to pull request across seven stages, each performed by a specific agent or connector. A Run control replays the pipeline."
       className="border border-white/[0.08] bg-bg-deeper p-[clamp(20px,3vw,32px)]"
     >
-      <div className="relative pl-[34px]">
-        <Draw
-          axis="y"
-          delay={0.1}
-          className="absolute bottom-2 left-[9px] top-2 w-px bg-gradient-to-b from-accent/50 to-accent/[0.08]"
-        />
-        <Stagger as="ol" stagger={STAGGER.loose} className="flex flex-col gap-4">
-          {SEQUENCE.map((step) => (
-            <Reveal as="li" key={step.n} item variants={riseSm} className="relative">
-              <span
-                aria-hidden
-                className="absolute -left-[34px] top-0.5 flex size-[19px] items-center justify-center rounded-full border-2 border-accent/50 bg-bg-deeper font-mono text-[10px] text-accent-soft"
-              >
-                {step.n}
-              </span>
-              <div className="flex flex-wrap items-baseline gap-2.5">
-                <span className="text-[15px] font-semibold text-white">{step.title}</span>
-                <span className="rounded-[5px] border border-accent/25 bg-accent/10 px-2 py-0.5 font-mono text-[10.5px] text-accent-soft">
-                  {step.actor}
-                </span>
-              </div>
-              <p className="mt-1.5 text-caption leading-[1.55] text-fg-subtle">{step.detail}</p>
-            </Reveal>
-          ))}
-        </Stagger>
-      </div>
+      <SequenceRunner steps={SEQUENCE} />
     </DiagramFrame>
   );
 }

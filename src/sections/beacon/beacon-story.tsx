@@ -31,7 +31,7 @@ export function BeaconStory() {
             <Reveal as="div" key={link.title} item>
               <Link
                 href={link.href}
-                className="group flex h-full flex-col rounded-2xl border border-white/[0.08] bg-surface p-6 transition-colors hover:border-brand/40"
+                className="group lift flex h-full flex-col rounded-2xl border border-white/[0.08] bg-surface p-6 hover:border-brand/40"
               >
                 <span className="flex items-start justify-between gap-3">
                   <span className="text-[15px] font-semibold leading-snug text-white">

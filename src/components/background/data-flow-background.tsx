@@ -76,6 +76,8 @@ interface Edge {
   a: number;
   b: number;
   latent: boolean;
+  /** Individual slow phase so latent links drift in/out — evolving topology. */
+  phase: number;
 }
 
 interface Pulse {
@@ -136,10 +138,11 @@ function buildGraph() {
         const nn = nodes[nearest];
         if (nb && nn && Math.abs(nb.by - nodeA.by) < Math.abs(nn.by - nodeA.by)) nearest = b;
       }
-      edges.push({ a, b: nearest, latent: false });
+      edges.push({ a, b: nearest, latent: false, phase: rng() * Math.PI * 2 });
       // …plus one initially-latent connection for variety.
       const other = to[Math.floor(rng() * to.length)];
-      if (other !== undefined && other !== nearest) edges.push({ a, b: other, latent: true });
+      if (other !== undefined && other !== nearest)
+        edges.push({ a, b: other, latent: true, phase: rng() * Math.PI * 2 });
     }
   }
 
@@ -256,6 +259,17 @@ export function DataFlowBackground({
       window.addEventListener("pointerleave", onPointerLeave, { passive: true });
     }
 
+    // ---- Idle detection: an unattended system calms down ----
+    let lastInteraction = performance.now();
+    const stamp = () => {
+      lastInteraction = performance.now();
+    };
+    if (!reduceMotion) {
+      window.addEventListener("scroll", stamp, { passive: true });
+      window.addEventListener("pointermove", stamp, { passive: true });
+      window.addEventListener("keydown", stamp, { passive: true });
+    }
+
     const spawnPulse = (accent: boolean) => {
       const src = sources[Math.floor(Math.random() * sources.length)];
       if (src === undefined) return;
@@ -302,7 +316,13 @@ export function DataFlowBackground({
         const a = nodes[edge.a];
         const b = nodes[edge.b];
         if (!a || !b) continue;
-        let alpha = edge.latent ? CONFIG.latentEdgeAlpha * state.arch : CONFIG.edgeAlpha;
+        // Latent links: fully revealed in architecture sections; elsewhere they
+        // drift in and out on ~40s individual cycles — the topology slowly
+        // evolves for anyone patient enough to watch.
+        const drift = 0.5 + 0.5 * Math.sin(t * 0.16 + edge.phase);
+        let alpha = edge.latent
+          ? CONFIG.latentEdgeAlpha * Math.max(state.arch, 0.35 * drift)
+          : CONFIG.edgeAlpha;
         // Pointer proximity brightens nearby edges slightly.
         if (state.px > -9000) {
           const mx = (a.x + b.x) / 2;
@@ -392,9 +412,13 @@ export function DataFlowBackground({
       state.px += (state.pxT - state.px) * 0.12;
       state.py += (state.pyT - state.py) * 0.12;
 
-      // Spawn pulses at an activity-scaled rate
+      // Spawn pulses at an activity-scaled rate; after ~30s without input the
+      // network winds down to half traffic (idleness eases 0 → 1 over 30-60s).
       sinceSpawn += dt;
-      const interval = CONFIG.spawnBase + (CONFIG.spawnActive - CONFIG.spawnBase) * state.activity;
+      const idleness = Math.min(Math.max((now - lastInteraction - 30_000) / 30_000, 0), 1);
+      const interval =
+        (CONFIG.spawnBase + (CONFIG.spawnActive - CONFIG.spawnBase) * state.activity) *
+        (1 + idleness);
       if (sinceSpawn >= interval) {
         sinceSpawn = 0;
         spawnPulse(state.activity > 0.5);
@@ -446,6 +470,9 @@ export function DataFlowBackground({
       window.removeEventListener("resize", onResize);
       window.removeEventListener("pointermove", onPointerMove);
       window.removeEventListener("pointerleave", onPointerLeave);
+      window.removeEventListener("scroll", stamp);
+      window.removeEventListener("pointermove", stamp);
+      window.removeEventListener("keydown", stamp);
       document.removeEventListener("visibilitychange", onVisibility);
       observer?.disconnect();
     };

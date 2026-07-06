@@ -30,7 +30,7 @@ export function BeaconTeaser() {
   return (
     <Link
       href="/work/beacon"
-      className="group block overflow-hidden rounded-2xl border border-brand/[0.25] bg-surface transition-colors hover:border-brand/50"
+      className="group lift block overflow-hidden rounded-2xl border border-brand/[0.25] bg-surface hover:border-brand/50"
       aria-label="Beacon — open the full engineering case study"
     >
       <div className="grid md:grid-cols-[1.15fr_1fr]">

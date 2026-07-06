@@ -11,7 +11,13 @@ const AssistantPanel = dynamic(
   { ssr: false },
 );
 
-/** Floating trigger + container for the AI Portfolio Assistant. */
+/**
+ * Floating trigger + container for the Portfolio Copilot.
+ *
+ * The idle trigger reads as a system status chip, not a support-chat bubble:
+ * a live dot plus a mono status line — the assistant is one more running
+ * service of the platform the visitor is already watching work.
+ */
 export function AssistantLauncher() {
   const [open, setOpen] = useState(false);
 
@@ -25,11 +31,17 @@ export function AssistantLauncher() {
         <button
           type="button"
           onClick={() => setOpen(true)}
-          aria-label="Open AI portfolio assistant"
-          className="fixed bottom-6 right-6 z-[61] inline-flex items-center gap-2 rounded-full border border-accent/30 bg-surface-raised px-4 py-3 text-sm font-medium text-white shadow-[var(--shadow-card)] transition-colors hover:border-accent/60"
+          aria-label="Open the Portfolio Copilot — an AI engineering assistant that answers questions about Son's work"
+          className="fixed bottom-6 right-6 z-[61] inline-flex items-center gap-2.5 rounded-full border border-accent/30 bg-surface-raised px-4 py-3 shadow-[var(--shadow-card)] transition-colors hover:border-accent/60"
         >
-          <Sparkles size={16} className="text-accent-soft" aria-hidden />
-          Ask about Son
+          <span aria-hidden className="relative flex size-2">
+            <span className="absolute inline-flex h-full w-full animate-pulse-dot rounded-full bg-success" />
+          </span>
+          <span className="text-sm font-medium text-white">Portfolio Copilot</span>
+          <span aria-hidden className="hidden font-mono text-[10.5px] text-fg-faint sm:inline">
+            · online
+          </span>
+          <Sparkles size={14} className="text-accent-soft" aria-hidden />
         </button>
       )}
     </>
