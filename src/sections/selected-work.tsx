@@ -4,6 +4,7 @@ import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
 import { SectionHeader } from "@/components/ui/section-header";
 import { Reveal } from "@/components/motion/reveal";
+import { BeaconTeaser } from "@/components/work/beacon-teaser";
 import { ProjectCard, ProjectDetails } from "@/components/work/project-card";
 import {
   LayeredArchitectureDiagram,
@@ -31,6 +32,10 @@ export function SelectedWork() {
         />
 
         <div className="flex flex-col gap-7">
+          <Reveal>
+            <BeaconTeaser />
+          </Reveal>
+
           <Reveal>
             <ProjectCard
               index={WORK.playwright.index}

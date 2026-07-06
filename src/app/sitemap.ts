@@ -5,8 +5,8 @@ import { SITE } from "@/constants/site";
 export const dynamic = "force-static";
 
 /**
- * Static sitemap. With `output: "export"` this is emitted as /sitemap.xml at
- * build time. Single-page site, so one canonical entry.
+ * Static sitemap, emitted as /sitemap.xml at build time: the single-page
+ * home plus the Beacon case-study route.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
@@ -15,6 +15,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 1,
+    },
+    {
+      url: `${SITE.url}/work/beacon`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.9,
     },
   ];
 }
