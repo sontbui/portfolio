@@ -66,8 +66,10 @@ export function AssistantPanel({ onClose }: { onClose: () => void }) {
             <Sparkles size={15} aria-hidden />
           </span>
           <div>
-            <p className="text-sm font-semibold leading-tight">AI Portfolio Assistant</p>
-            <p className="text-[11px] leading-tight text-fg-faint">Ask about Son&apos;s work</p>
+            <p className="text-sm font-semibold leading-tight">Son-AI</p>
+            <p className="text-[11px] leading-tight text-fg-faint">
+              Engineering assistant · ask about Son or software engineering
+            </p>
           </div>
         </div>
         <div className="flex items-center gap-1">
@@ -151,7 +153,7 @@ export function AssistantPanel({ onClose }: { onClose: () => void }) {
             onChange={handleInputChange}
             onKeyDown={onKeyDown}
             rows={1}
-            placeholder="Ask about Son's experience, projects, skills…"
+            placeholder="Ask about Son — or anything in AI, testing, architecture…"
             className="max-h-28 flex-1 resize-none bg-transparent py-1 text-body-sm text-fg placeholder:text-fg-faint focus:outline-none"
             aria-label="Message"
           />

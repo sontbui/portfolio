@@ -142,7 +142,7 @@ export const WORK = {
   description:
     "Enterprise work is presented through original architecture diagrams — the engineering, without proprietary detail.",
   playwright: {
-    index: "02",
+    index: "03",
     context: "Enterprise · OPSWAT",
     title: "Enterprise Playwright Automation Framework",
     summary:
@@ -154,7 +154,7 @@ export const WORK = {
     ] satisfies DetailBlock[],
   },
   infrastructure: {
-    index: "03",
+    index: "04",
     context: "Enterprise · OPSWAT",
     badge: "representative model",
     title: "Enterprise Test Infrastructure",
@@ -167,7 +167,7 @@ export const WORK = {
     ] satisfies DetailBlock[],
   },
   ecommerce: {
-    index: "04",
+    index: "05",
     context: "Personal · Full-Stack",
     title: "E-Commerce Platform",
     summary:

@@ -3,12 +3,18 @@ import { Section } from "@/components/ui/section";
 import { SectionHeader } from "@/components/ui/section-header";
 import { Tag } from "@/components/ui/tag";
 import { Reveal } from "@/components/motion/reveal";
+import { Stagger } from "@/components/motion/stagger";
+import { Draw } from "@/components/motion/draw";
 import { EXPERIENCE } from "@/constants/data";
 import type { ExperienceRole } from "@/types";
 
 /**
  * Career timeline. Rendered as an ordered list on a vertical rail so the
  * chronology is conveyed semantically, not just visually.
+ *
+ * Motion: the rail draws downward while the roles cascade in top → bottom, so
+ * the chronology visibly *builds* in order — a distinct identity from the
+ * block fades used elsewhere. Gated on reduced motion.
  */
 export function Experience() {
   return (
@@ -22,19 +28,19 @@ export function Experience() {
         />
 
         <div className="relative pl-8">
-          {/* Vertical rail (decorative) */}
-          <span
-            aria-hidden
+          {/* Vertical rail (decorative) — draws in as the section enters view. */}
+          <Draw
+            axis="y"
             className="absolute bottom-1.5 left-[7px] top-1.5 w-px bg-gradient-to-b from-white/15 to-white/[0.02]"
           />
-          <ol className="flex flex-col gap-8">
+          <Stagger as="ol" className="flex flex-col gap-8" stagger={0.12}>
             {EXPERIENCE.map((job) => (
-              <Reveal as="li" key={`${job.company}-${job.period}`} className="relative">
+              <Reveal as="li" key={`${job.company}-${job.period}`} item className="relative">
                 <TimelineNode />
                 <RoleCard job={job} />
               </Reveal>
             ))}
-          </ol>
+          </Stagger>
         </div>
       </Container>
     </Section>
@@ -54,7 +60,7 @@ function TimelineNode() {
 
 function RoleCard({ job }: { job: ExperienceRole }) {
   return (
-    <article className="rounded-xl border border-white/[0.07] bg-surface-raised px-6 py-6 transition-colors hover:border-white/15">
+    <article className="lift rounded-xl border border-white/[0.07] bg-surface-raised px-6 py-6 hover:border-white/15">
       <div className="mb-1.5 flex flex-wrap items-baseline justify-between gap-2">
         <h3 className="text-lg font-semibold">{job.role}</h3>
         <span className="font-mono text-[12.5px] text-fg-faint">{job.period}</span>
