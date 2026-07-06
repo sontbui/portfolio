@@ -24,3 +24,7 @@ He established automation architecture and engineering standards and reviewed au
 Son built responsive, type-safe React components that improved maintainability and reduced duplication. He integrated backend APIs and contributed to requirement analysis, testing, and debugging, delivering the contract scope on a short timeline without sacrificing code quality.
 
 **Technologies:** React, TypeScript, Material UI.
+
+## AI / NLP Engineer — small team engagement
+
+Earlier in his journey, Son worked professionally with a small team **building machine-learning models for Natural Language Processing tasks**. Combined with the computer-vision work in his prize-winning research project (YOLOv8 food recognition), this hands-on model-building experience is why he treats AI as an engineering component he understands from the inside — training, evaluating, and shipping models, not just calling APIs.

@@ -154,7 +154,7 @@ export function AssistantPanel({ onClose }: { onClose: () => void }) {
             onKeyDown={onKeyDown}
             rows={1}
             placeholder="Ask about Son — or anything in AI, testing, architecture…"
-            className="max-h-28 flex-1 resize-none bg-transparent py-1 text-body-sm text-fg placeholder:text-fg-faint focus:outline-none"
+            className="scrollbar-hidden max-h-28 flex-1 resize-none bg-transparent py-1 text-body-sm text-fg placeholder:text-fg-faint focus:outline-none"
             aria-label="Message"
           />
           {isLoading ? (

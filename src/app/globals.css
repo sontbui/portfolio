@@ -233,6 +233,15 @@
     background-size: 60px 60px;
   }
 
+  /* Horizontally scrollable rows (sub-navs, chip strips) that shouldn't show
+     a scrollbar — scrolling still works via touch/trackpad/keyboard. */
+  .scrollbar-hidden {
+    scrollbar-width: none; /* Firefox */
+  }
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none; /* WebKit */
+  }
+
   /* Subtle hover lift for interactive cards. Pairs with existing border-color
      hovers. GPU-friendly (transform only); reduced-motion snaps it instantly
      via the global rule above, which is imperceptible at 2px. */
