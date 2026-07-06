@@ -47,7 +47,7 @@ export function BeaconSubnav() {
           <BeaconMark size={20} className="text-fg-strong" />
           Beacon
         </span>
-        <ul className="ml-auto flex items-center gap-0.5 overflow-x-auto">
+        <ul className="scrollbar-hidden ml-auto flex items-center gap-0.5 overflow-x-auto">
           {LINKS.map((link) => {
             const isActive = activeId === link.href.slice(1);
             return (
