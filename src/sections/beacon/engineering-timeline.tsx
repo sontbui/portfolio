@@ -2,6 +2,7 @@ import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
 import { SectionHeader } from "@/components/ui/section-header";
 import { Reveal } from "@/components/motion/reveal";
+import { Draw } from "@/components/motion/draw";
 import { DiagramLabel } from "@/components/diagrams/primitives";
 import { BEACON_TIMELINE } from "@/constants/beacon";
 
@@ -10,6 +11,9 @@ import { BEACON_TIMELINE } from "@/constants/beacon";
  * each stage carries the decision made, alternatives weighed, and (where it
  * exists) the honest "what I'd change today". The maturity is in the trade-off
  * commentary, not the chronology.
+ *
+ * Motion: the spine draws downward as the section enters view while phases
+ * cascade in, so the journey visibly builds in order. Gated on reduced motion.
  */
 export function EngineeringTimeline() {
   return (
@@ -21,7 +25,11 @@ export function EngineeringTimeline() {
           description="Not a changelog — the decisions. Each phase records why the call was made, what was considered instead, and what I'd do differently today."
           className="mb-12"
         />
-        <ol className="relative flex flex-col gap-2 before:absolute before:bottom-6 before:left-[7px] before:top-6 before:w-px before:bg-line md:before:left-[9px]">
+        <ol className="relative flex flex-col gap-2">
+          <Draw
+            axis="y"
+            className="absolute bottom-6 left-[7px] top-6 w-px bg-line md:left-[9px]"
+          />
           {BEACON_TIMELINE.map((stage, i) => (
             <li key={stage.phase} className="relative pl-9 md:pl-12">
               <span

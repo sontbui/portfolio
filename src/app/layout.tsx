@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 
 import { Analytics } from "@/components/layout/analytics";
+import { DataFlowBackground } from "@/components/background/data-flow-background";
 import { AssistantLauncher } from "@/components/assistant/assistant-launcher";
 import { StructuredData } from "@/components/layout/structured-data";
 import { SITE } from "@/constants/site";
@@ -55,6 +56,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <a href="#main" className="sr-only-focusable">
           Skip to content
         </a>
+        {/* Ambient distributed-system graph behind all content (z-index -1). */}
+        <DataFlowBackground />
         {children}
         <AssistantLauncher />
         <StructuredData />

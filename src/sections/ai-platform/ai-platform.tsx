@@ -7,6 +7,7 @@ import { Section } from "@/components/ui/section";
 import { Tag } from "@/components/ui/tag";
 import { Reveal } from "@/components/motion/reveal";
 import { Stagger } from "@/components/motion/stagger";
+import { CountUp } from "@/components/motion/count-up";
 import {
   AgentOrchestrationDiagram,
   ExecutionSequenceDiagram,
@@ -33,6 +34,12 @@ const SUB_NAV = [
  * Flagship case study — the highest-fidelity section. Composed from focused
  * sub-blocks (problem, architecture, sequence, decisions, metrics, roadmap),
  * each independently revealed and deep-linkable via the in-section sub-nav.
+ *
+ * Motion identity: this is the "product demo" of the page. The architecture
+ * and sequence diagrams *assemble themselves* stage by stage when scrolled
+ * into view (see ai-diagrams.tsx), the POC metrics count up, and the ambient
+ * Data Flow background raises its activity while this section is centred — so
+ * the whole viewport subtly feels like a system doing work.
  */
 export function AIPlatform() {
   return (
@@ -96,26 +103,26 @@ export function AIPlatform() {
           </Reveal>
         </div>
 
-        {/* Architecture */}
+        {/* Architecture — heading reveals, then the diagram assembles itself. */}
         <div id="ai-arch" className="mt-12 scroll-mt-[var(--header-h)]">
           <Reveal>
             <DiagramHeading
               title="Agent Orchestration Architecture"
               meta="multi-agent · MCP-connected"
             />
-            <AgentOrchestrationDiagram />
           </Reveal>
+          <AgentOrchestrationDiagram />
         </div>
 
-        {/* Sequence */}
+        {/* Sequence — steps light up in execution order. */}
         <div id="ai-seq" className="mt-12 scroll-mt-[var(--header-h)]">
           <Reveal>
             <DiagramHeading
               title="Execution Sequence · Ticket → PR"
               meta="~20 min · ~10 test cases"
             />
-            <ExecutionSequenceDiagram />
           </Reveal>
+          <ExecutionSequenceDiagram />
         </div>
 
         {/* Decisions */}
@@ -126,7 +133,7 @@ export function AIPlatform() {
           <Stagger className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] gap-4">
             {DECISIONS.map((decision) => (
               <Reveal as="div" key={decision.title} item>
-                <Card surface="base" padding="md" className="h-full rounded-xl">
+                <Card surface="base" padding="md" className="lift h-full rounded-xl hover:border-white/20">
                   <h4 className="mb-2 text-body font-semibold text-white">{decision.title}</h4>
                   <p className="text-sm leading-[1.6] text-fg-subtle">{decision.body}</p>
                 </Card>
@@ -143,10 +150,11 @@ export function AIPlatform() {
           <Stagger className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,150px),1fr))] gap-3.5">
             {AI_METRICS.map((metric) => (
               <Reveal as="div" key={metric.label} item>
-                <div className="h-full rounded-xl border border-accent/[0.18] bg-surface p-6">
-                  <p className="text-[length:clamp(30px,4vw,40px)] font-bold leading-none tracking-[-0.03em] text-white">
-                    {metric.value}
-                  </p>
+                <div className="lift h-full rounded-xl border border-accent/[0.18] bg-surface p-6 hover:border-accent/40">
+                  <CountUp
+                    value={metric.value}
+                    className="block text-[length:clamp(30px,4vw,40px)] font-bold leading-none tracking-[-0.03em] text-white"
+                  />
                   <p className="mt-2 text-caption leading-[1.4] text-fg-subtle">{metric.label}</p>
                 </div>
               </Reveal>

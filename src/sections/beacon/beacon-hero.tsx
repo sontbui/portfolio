@@ -2,6 +2,8 @@ import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { ButtonLink } from "@/components/ui/button-link";
 import { Reveal } from "@/components/motion/reveal";
+import { TextReveal } from "@/components/motion/text-reveal";
+import { Magnetic } from "@/components/motion/magnetic";
 import { BeaconMark } from "@/sections/beacon/beacon-mark";
 import { BEACON, BEACON_PROBLEM } from "@/constants/beacon";
 
@@ -29,9 +31,14 @@ export function BeaconHero() {
           <Eyebrow tone="brand" className="mb-5">
             {BEACON.eyebrow}
           </Eyebrow>
-          <h1 className="flex flex-wrap items-center gap-4 text-display font-bold leading-[1.02] tracking-[-0.035em]">
+          <h1 className="flex flex-wrap items-center gap-4">
             <BeaconMark size={52} className="text-fg-strong" />
-            {BEACON.title}
+            <TextReveal
+              className="text-display font-bold leading-[1.02] tracking-[-0.035em]"
+              delay={0.05}
+            >
+              {BEACON.title}
+            </TextReveal>
           </h1>
           <p className="mt-3 font-mono text-[15px] text-brand-soft">{BEACON.tagline}</p>
           <p className="mt-6 max-w-[var(--prose-max)] text-lead leading-[1.65] text-fg-subtle">
@@ -41,7 +48,9 @@ export function BeaconHero() {
 
         <Reveal delay={0.1}>
           <div className="mt-9 flex flex-wrap gap-3">
-            <ButtonLink href="#demo">Try the interactive demo</ButtonLink>
+            <Magnetic>
+              <ButtonLink href="#demo">Try the interactive demo</ButtonLink>
+            </Magnetic>
             <ButtonLink href="#architecture" variant="secondary">
               Explore the architecture
             </ButtonLink>
