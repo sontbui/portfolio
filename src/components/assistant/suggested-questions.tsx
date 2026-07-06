@@ -8,8 +8,9 @@ interface Suggestion {
 }
 
 const SUGGESTIONS: Suggestion[] = [
-  { emoji: "👋", label: "Tell me about Son", prompt: "Tell me about Son." },
+  { emoji: "👋", label: "Tell me about Son", prompt: "Tell me about Son — who he is and where he comes from." },
   { emoji: "🚀", label: "Explain the AI Automation Platform", prompt: "Explain the AI Automation Platform." },
+  { emoji: "🔦", label: "What is Beacon?", prompt: "Tell me about Beacon and the engineering decisions behind it." },
   { emoji: "🏗", label: "Explain the Automation Framework", prompt: "Explain the Playwright automation framework." },
   { emoji: "⚙", label: "Engineering philosophy", prompt: "What engineering principles does Son follow?" },
   { emoji: "📈", label: "Biggest achievements", prompt: "What are Son's biggest engineering achievements?" },
@@ -18,6 +19,7 @@ const SUGGESTIONS: Suggestion[] = [
   { emoji: "🖥", label: "Cross-platform testing", prompt: "Tell me about Son's cross-platform testing experience." },
   { emoji: "☁", label: "CI/CD & infrastructure", prompt: "Describe Son's CI/CD and automation infrastructure experience." },
   { emoji: "💡", label: "Problems Son enjoys solving", prompt: "What kinds of problems does Son enjoy solving?" },
+  { emoji: "🧩", label: "Ask a technical question", prompt: "Compare Playwright and Selenium for a new E2E test suite — trade-offs?" },
 ];
 
 /** Suggestion cards shown in the empty state (and re-usable elsewhere). */

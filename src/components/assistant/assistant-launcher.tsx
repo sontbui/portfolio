@@ -31,13 +31,13 @@ export function AssistantLauncher() {
         <button
           type="button"
           onClick={() => setOpen(true)}
-          aria-label="Open the Portfolio Copilot — an AI engineering assistant that answers questions about Son's work"
+          aria-label="Open Son-AI — an AI engineering assistant that answers questions about Son's work and general software engineering"
           className="fixed bottom-6 right-6 z-[61] inline-flex items-center gap-2.5 rounded-full border border-accent/30 bg-surface-raised px-4 py-3 shadow-[var(--shadow-card)] transition-colors hover:border-accent/60"
         >
           <span aria-hidden className="relative flex size-2">
             <span className="absolute inline-flex h-full w-full animate-pulse-dot rounded-full bg-success" />
           </span>
-          <span className="text-sm font-medium text-white">Portfolio Copilot</span>
+          <span className="text-sm font-medium text-white">Son-AI</span>
           <span aria-hidden className="hidden font-mono text-[10.5px] text-fg-faint sm:inline">
             · online
           </span>

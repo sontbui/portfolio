@@ -11,7 +11,7 @@ const BUILDS = [
     arch: "Apple Silicon · DMG",
     version: "v278.26.710",
     size: "~100 MB",
-    href: "/downloads/Beacon-278.26.710-arm64.dmg",
+    href: "https://github.com/sontbui/portfolio/releases/download/beacon-v278/Beacon-278.26.710-arm64.dmg",
     note: "Unsigned internal build — on first launch run: xattr -dr com.apple.quarantine /Applications/Beacon.app",
   },
   {
@@ -19,7 +19,7 @@ const BUILDS = [
     arch: "x64 · NSIS installer",
     version: "v278.26.707",
     size: "~83 MB",
-    href: "/downloads/Beacon-Setup-278.26.707.exe",
+    href: "https://github.com/sontbui/portfolio/releases/download/beacon-v278/Beacon-Setup-278.26.707.exe",
     note: "SmartScreen may warn on unsigned installers — choose 'More info → Run anyway'.",
   },
 ] as const;

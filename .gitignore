@@ -33,3 +33,6 @@ next-env.d.ts
 
 # design source (kept locally as the visual spec, not shipped)
 /_design-reference/
+
+# Beacon installers — distributed via GitHub Releases, not the repo
+/public/downloads/

@@ -9,13 +9,13 @@ lastUpdated: 2026-07-05
 
 ## Who is Son Bui
 
-Son Bui (full name Bui Thanh Son) is a Software Engineer in Test (SDET) based in Ho Chi Minh City, Vietnam, and open to remote work worldwide. His focus is intelligent test platforms, framework architecture, and testing infrastructure that make software quality scalable across an engineering organization.
+Son Bui (full name Bui Thanh Son, Vietnamese: Bùi Thanh Sơn — he goes by "Son") is a Software Engineer in Test (SDET) based in Ho Chi Minh City, Vietnam, and open to remote work worldwide. Born in 2003, he is originally from Bao Loc City in Lam Dong Province, where he grew up in a coffee-farming family. His focus is intelligent test platforms, framework architecture, and testing infrastructure that make software quality scalable across an engineering organization.
 
 His one-line positioning: **"I build AI-powered automation platforms — not just automated tests."**
 
 ## What makes his work distinctive
 
-Son treats automation as software engineering rather than script writing. He measures success not by the number of tests written, but by how much repetitive engineering effort his platforms eliminate for the whole team. His signature project is an AI-powered, multi-agent test-automation platform that takes a Jira ticket all the way to a production-ready pull request.
+Son treats automation as software engineering rather than script writing — software quality is an engineering problem, and testing should be designed like software. He believes good automation should be scalable, maintainable, observable, reusable, easy to extend, and platform-oriented; he values engineering systems over isolated scripts, and architecture over automation volume. He measures success not by the number of tests written, but by how much repetitive engineering effort his platforms eliminate for the whole team. His signature project is an AI-powered, multi-agent test-automation platform that takes a Jira ticket all the way to a production-ready pull request.
 
 ## Areas of strength
 
