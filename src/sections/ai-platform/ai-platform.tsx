@@ -1,4 +1,5 @@
-import { CircleDot } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, CircleDot } from "lucide-react";
 
 import { Card } from "@/components/ui/card";
 import { Container } from "@/components/ui/container";
@@ -123,6 +124,24 @@ export function AIPlatform() {
             />
           </Reveal>
           <ExecutionSequenceDiagram />
+          <Reveal>
+            <Link
+              href="/work/ai-pipeline"
+              className="group mt-4 flex flex-wrap items-center gap-3 rounded-xl border border-accent/[0.25] bg-accent/[0.05] px-5 py-4 transition-colors hover:border-accent/50"
+            >
+              <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-accent-soft">
+                Flagship demo
+              </span>
+              <span className="text-[14px] font-semibold text-white">
+                Open the live pipeline console — watch the real workflow execute, node by node
+              </span>
+              <ArrowRight
+                size={15}
+                aria-hidden
+                className="ml-auto text-accent-soft transition-transform group-hover:translate-x-1"
+              />
+            </Link>
+          </Reveal>
         </div>
 
         {/* Decisions */}
