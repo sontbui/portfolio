@@ -4,6 +4,8 @@ import { useState } from "react";
 import dynamic from "next/dynamic";
 import { Sparkles } from "lucide-react";
 
+import { cn } from "@/lib/utils";
+
 // Lazy-load the panel (and its heavy deps: markdown, syntax highlight, AI SDK,
 // diagrams) only when the user opens the assistant — keeps first paint fast.
 const AssistantPanel = dynamic(
@@ -20,17 +22,30 @@ const AssistantPanel = dynamic(
  */
 export function AssistantLauncher() {
   const [open, setOpen] = useState(false);
+  // Stays true after the first open: hiding the panel is CSS-only, so the
+  // conversation (and any streaming reply) survives. Clearing is explicit
+  // via the panel's Trash button.
+  const [mounted, setMounted] = useState(false);
 
   return (
     <>
-      {open ? (
-        <div className="fixed inset-0 z-[60] sm:inset-auto sm:bottom-4 sm:right-4 sm:h-[min(720px,calc(100dvh-2rem))] sm:w-[400px]">
-          <AssistantPanel onClose={() => setOpen(false)} />
+      {mounted ? (
+        <div
+          className={cn(
+            "fixed inset-0 z-[60] sm:inset-auto sm:bottom-4 sm:right-4 sm:h-[min(720px,calc(100dvh-2rem))] sm:w-[400px]",
+            !open && "hidden",
+          )}
+        >
+          <AssistantPanel onMinimize={() => setOpen(false)} />
         </div>
-      ) : (
+      ) : null}
+      {!open ? (
         <button
           type="button"
-          onClick={() => setOpen(true)}
+          onClick={() => {
+            setMounted(true);
+            setOpen(true);
+          }}
           aria-label="Open Son-AI — an AI engineering assistant that answers questions about Son's work and general software engineering"
           className="fixed bottom-6 right-6 z-[61] inline-flex items-center gap-2.5 rounded-full border border-accent/30 bg-surface-raised px-4 py-3 shadow-[var(--shadow-card)] transition-colors hover:border-accent/60"
         >
@@ -43,7 +58,7 @@ export function AssistantLauncher() {
           </span>
           <Sparkles size={14} className="text-accent-soft" aria-hidden />
         </button>
-      )}
+      ) : null}
     </>
   );
 }
