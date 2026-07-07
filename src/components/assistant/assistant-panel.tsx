@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { ArrowUp, RotateCcw, Sparkles, Square, Trash2, X } from "lucide-react";
+import { ArrowUp, Minus, RotateCcw, Sparkles, Square, Trash2 } from "lucide-react";
 
 import { ChatMessage, TypingIndicator } from "@/components/assistant/message";
 import { SuggestedQuestions } from "@/components/assistant/suggested-questions";
@@ -10,7 +10,13 @@ import { cn } from "@/lib/utils";
 
 /** The chat surface. Owns streaming, cancel, retry, clear, keyboard shortcuts,
  *  auto-scroll, and the empty/typing/error states. */
-export function AssistantPanel({ onClose }: { onClose: () => void }) {
+export function AssistantPanel({
+  onMinimize,
+}: {
+  /** Hide the panel — the conversation stays alive (state stays mounted).
+   *  Clearing the conversation is the Trash button's job. */
+  onMinimize: () => void;
+}) {
   const {
     messages,
     input,
@@ -36,15 +42,15 @@ export function AssistantPanel({ onClose }: { onClose: () => void }) {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [messages, showTyping]);
 
-  // Focus the input on open; Escape closes the panel.
+  // Focus the input on open; Escape minimizes (conversation is preserved).
   useEffect(() => {
     inputRef.current?.focus();
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") onMinimize();
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [onClose]);
+  }, [onMinimize]);
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
@@ -85,11 +91,12 @@ export function AssistantPanel({ onClose }: { onClose: () => void }) {
           ) : null}
           <button
             type="button"
-            onClick={onClose}
-            aria-label="Close assistant"
+            onClick={onMinimize}
+            aria-label="Hide assistant — the conversation is kept"
+            title="Hide — conversation is kept"
             className="inline-flex size-8 items-center justify-center rounded-lg text-fg-subtle hover:bg-surface-raised hover:text-white"
           >
-            <X size={16} aria-hidden />
+            <Minus size={16} aria-hidden />
           </button>
         </div>
       </header>
@@ -99,8 +106,8 @@ export function AssistantPanel({ onClose }: { onClose: () => void }) {
         {isEmpty ? (
           <div className="flex flex-col gap-4">
             <p className="text-body-sm text-fg-subtle">
-              Hi — I&apos;m Son&apos;s AI portfolio assistant. I answer from his portfolio only.
-              Try one of these:
+              Hi — I&apos;m Son-AI. Ask me anything about Son (facts come straight from his
+              portfolio) or about software engineering in general. Try one of these:
             </p>
             <SuggestedQuestions onSelect={ask} />
           </div>
