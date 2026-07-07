@@ -115,6 +115,14 @@
   }
 }
 
+/* Marching dashes for active workflow edges (pipeline console). Disabled
+   globally under prefers-reduced-motion like every other animation. */
+@keyframes dashFlow {
+  to {
+    stroke-dashoffset: -12;
+  }
+}
+
 /* Loading shimmer for skeleton/streaming placeholders. */
 @keyframes shimmer {
   0% {
@@ -231,6 +239,12 @@
       linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
       linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
     background-size: 60px 60px;
+  }
+
+  /* Active edge in the pipeline console DAG — data visibly in transit. */
+  .edge-flow {
+    stroke-dasharray: 6 6;
+    animation: dashFlow 0.7s linear infinite;
   }
 
   /* Horizontally scrollable rows (sub-navs, chip strips) that shouldn't show
